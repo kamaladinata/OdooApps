@@ -26,5 +26,5 @@
     'price': 25.0,
     'sequence': 1,
     'currency': 'USD',
-    'live_test_url': 'https://www.youtube.com/channel/UClhaCvCIq4NBghgjPtMu_pA',
+    'live_test_url': 'https://www.youtube.com/watch?v=D3bc80Ualk8',
 }
