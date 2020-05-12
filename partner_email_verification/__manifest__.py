@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 {
-    'name': 'Email Verification',
+    'name': 'Partner Email Verification',
     'version': '11.0.0.1.9.1',
     'author': 'Kamal from Port Cities',
     'category': 'Contact',
@@ -22,7 +22,7 @@
     'installable': True,
     'application': True,
     'auto_install': False,
-    'price': 10.0,
+    'price': 25.0,
     'sequence': 1,
     'currency': 'USD',
     'live_test_url': 'https://www.youtube.com/channel/UClhaCvCIq4NBghgjPtMu_pA',

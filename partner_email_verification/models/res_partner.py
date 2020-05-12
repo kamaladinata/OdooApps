@@ -38,7 +38,7 @@ class ResPartner(models.Model):
         self._generate_access_token()
         ir_model_data = self.env['ir.model.data']
         try:
-            template_id = ir_model_data.get_object_reference('email_verification', 'email_template_edit_partner_verification')[1]
+            template_id = ir_model_data.get_object_reference('partner_email_verification', 'email_template_edit_partner_verification')[1]
         except ValueError:
             template_id = False
         

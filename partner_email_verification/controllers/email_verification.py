@@ -15,10 +15,10 @@ class VerificationEmail(http.Controller):
     def check_email_verification(self, partner_id, token, **kwargs):
         partner = self._get_partner(partner_id, token)
         if partner.is_email_verified:
-            return request.env['ir.ui.view'].render_template('email_verification.partner_external_page_view', {
+            return request.env['ir.ui.view'].render_template('partner_email_verification.partner_external_page_view', {
             'web_base_url': 'https://mail.google.com/'
         })
-        return request.env['ir.ui.view'].render_template('email_verification.partner_external_page_submit', {
+        return request.env['ir.ui.view'].render_template('partner_email_verification.partner_external_page_submit', {
             'token': token, 'partner_id': partner_id, 'email': partner.email,
         })
     
@@ -27,6 +27,6 @@ class VerificationEmail(http.Controller):
         partner = self._get_partner(partner_id, token)
         if partner:
             partner.is_email_verified = True
-        return request.env['ir.ui.view'].render_template('email_verification.partner_external_page_view', {
+        return request.env['ir.ui.view'].render_template('partner_email_verification.partner_external_page_view', {
             'web_base_url': request.env['ir.config_parameter'].sudo().get_param('web.base.url')
         })
