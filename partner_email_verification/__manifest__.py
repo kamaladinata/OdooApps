@@ -12,6 +12,7 @@
         * Add feature Email Verification \n
     """,
     'depends': ['contacts', 'portal'],
+    'images': ['images/main_verified.png'],
     'data' : [
         'data/mail_template_data.xml',
         'views/res_partner_view.xml',
