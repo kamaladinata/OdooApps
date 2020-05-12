@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+
+    <template id="partner_external_page_view" name="Reopen Page Done">
+        <t t-call="web.layout">
+            <t t-set="head">
+                <link rel='stylesheet' href='/web/static/lib/bootstrap/css/bootstrap.css'/>
+                <link rel='stylesheet' href='/web/static/lib/fontawesome/css/font-awesome.css'/>
+            </t>
+            <div class="container">
+                <div class="text-center" style="margin-top:128px">
+                    <i class="fa fa-check-circle fa-5x text-success" />
+                </div>
+                <h2 class="text-center">Email are verified!</h2>
+                <div class="text-center">
+                    <a class="btn btn-primary">Thank You</a>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="partner_external_page_submit" name="Reopen Page Submit">
+        <t t-call="web.layout">
+            <t t-set="head">
+                <link rel='stylesheet' href='/web/static/lib/bootstrap/css/bootstrap.css'/>
+                <link rel='stylesheet' href='/web/static/lib/fontawesome/css/font-awesome.css'/>
+            </t>
+            <div class="container">
+                <h2 class="text-center">Confirmation to Email Verification!</h2>
+                <div class="text-center">
+                    <p style="margin-top:32px;">
+                        Are you sure to confirm email <span t-esc='email'/>?
+                    </p>
+                    <form class="form-horizontal" t-attf-action="/customer/verified/#{partner_id}/#{token}" method="post">
+                        <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                        <button type="submit" class="btn btn-primary" style="margin-top:8px;">Verification</button>
+                    </form>
+                </div>              
+            </div>
+        </t>
+    </template>
+</odoo>

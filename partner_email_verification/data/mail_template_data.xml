@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="0">
+
+        <!--Email template -->
+        <record id="email_template_edit_partner_verification" model="mail.template">
+            <field name="name">Partner - Email Verification</field>
+            <field name="email_from">${(object.user_id.email and '&quot;%s&quot; &lt;%s&gt;' % (object.user_id.name, object.user_id.email) or '')|safe}</field>
+            <field name="subject">(${object.name or 'n/a' } - Email Verification)</field>
+            <field name="partner_to">${object.id}</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">${object.lang}</field>
+            <field name="body_html">
+<![CDATA[
+    <p>Dear ${object.name}
+    % set access_action = object.with_context(force_website=True).get_access_action()
+    % set is_online = access_action and access_action['type'] == 'ir.actions.act_url'
+    % set doc_name = 'Email Verification'
+    % set access_name = is_online and 'Email Verification' or ''
+
+    % if object.parent_id:
+        (<i>${object.parent_id.name}</i>)
+    % endif
+    ,</p>
+    <p>
+    Your email has been registered as our partner, please confirm and verify your email by clicking the button below: 
+
+    </p>
+    % if is_online:
+        <br/>
+        <center>
+            <a href="/customer/portal/${object.id}/${object.access_token}" style="background-color: #d41a0d; padding: 7px; text-decoration: none; color: #fff; border-radius: 5px; font-size: 14px;" class="o_default_snippet_text">${access_name}</a>
+        </center>
+        <br/>
+    % endif
+    
+    <p>You can reply to this email if you have any questions.</p>
+    <p>Thank you,</p>
+
+    <p style="color:#888888;">
+    % if object.user_id and object.user_id.signature:
+        ${object.user_id.signature | safe}
+    % endif
+    </p>
+]]>
+            </field>
+        </record>
+    </data>
+</odoo>
