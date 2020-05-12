@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+		<record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form.inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <field name="email" position="after">
+                	<field name="is_email_verified" groups="base.group_no_one"/>
+                </field>
+
+                <field name="email" position="attributes">
+                	<attribute name="attrs">{'required': ['|',('user_ids','!=', []),('parent_id','=',False)]}</attribute>
+                </field>
+
+                <xpath expr="//sheet/div[2]/field[@name='company_type']" position="after">
+	                <div class="badge-container">
+	                    <span class="badge" style="background-color: #5bc0de; color: white; border: 1px solid #5bc0de;" 
+	                    	attrs="{'invisible': [('is_email_verified', '=', False)]}">Email Verified</span>
+	                    <span class="badge" style="background-color: gray; color: white; border: 1px solid gray;" 
+	                    	attrs="{'invisible': [('is_email_verified', '=', True)]}">Email Not Verified</span>
+	                </div>
+	            </xpath>
+            	
+                <xpath expr="//form/sheet" position="before">
+                	<header>
+                        <button name="send_email_verification" string="Send Email Verification" type="object" class="oe_highlight"
+                            attrs="{'invisible': [('is_email_verified', '=', True)]}"/>
+					</header>
+                </xpath>
+                
+                <xpath expr="//form/sheet/notebook/page[1]/field/kanban/templates/t/div/div[2][hasclass('oe_kanban_details')]" position="replace">
+	                <div class="oe_kanban_details">
+	                    <div t-if="record.type.raw_value == 'contact'">
+	                		<field name="name"/>
+	                	</div>	
+	                    <div t-if="record.function.raw_value"><field name="function"/></div>
+						
+	                    <div t-if="record.type.raw_value != 'contact'">
+	                        <div><field name="street"/></div>  
+	                        <div><field name="street2"/></div>  
+	                        <div><field name="name"/></div>
+	                    </div>
+	                    <div t-if="record.phone.raw_value">Phone: <field name="phone"/></div>
+	                    <div t-if="record.mobile.raw_value">Mobile: <field name="mobile"/></div>
+	                    <field name="is_email_verified" invisible="1"/>
+		                <div class="badge-container">
+		                    <span class="badge" style="background-color: #5bc0de; color: white; border: 1px solid #5bc0de;" 
+		                    	attrs="{'invisible': [('is_email_verified', '=', False)]}">Email Verified</span>
+		                    <span class="badge" style="background-color: gray; color: white; border: 1px solid gray;" 
+		                    	attrs="{'invisible': [('is_email_verified', '=', True)]}">Email Not Verified</span>
+		                </div>
+	                </div>
+                </xpath>
+				
+            </field>
+        </record>
+        
+    	<record id="res_partner_kanban_view_inherit" model="ir.ui.view">
+	        <field name="name">res.partner.kanban.view.inherit</field>
+	        <field name="model">res.partner</field>
+	        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+	        <field name="arch" type="xml">
+	            <xpath expr="//div[hasclass('oe_kanban_partner_categories')]" position="inside">
+					<field name="is_email_verified" invisible="1"/>
+                    <div class="badge-container">
+						<span class="badge" style="background-color: #5bc0de; color: white; border: 1px solid #5bc0de;" 
+							attrs="{'invisible': [('is_email_verified', '=', False)]}">Email Verified</span>
+						<span class="badge" style="background-color: gray; color: white; border: 1px solid gray;" 
+							attrs="{'invisible': [('is_email_verified', '=', True)]}">Email Not Verified</span>
+					</div>
+                </xpath>
+	        </field>
+    	</record>
+    	
+	</data>
+</odoo>
