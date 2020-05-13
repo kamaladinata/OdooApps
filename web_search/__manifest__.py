@@ -1,0 +1,21 @@
+{
+    'name': 'Website Search Autocomplete',
+    'category': 'Website',
+    'sequence': 10,
+    'author': 'D.Jane',
+    'summary': 'E-commerce Search Autocomplete, Matching Words, Product Image',
+    'version': '12.0.0',
+    'description': "Website Search Suggestions",
+    'depends': ['website', 'website_helpdesk'],
+    'data': [
+        'views/header.xml',
+        'security/ir.model.access.csv',
+        'views/document_helpdesk_view.xml',
+        'views/website_document_helpdesk_view.xml',
+        'views/document_helpdesk_templates.xml',
+    ],
+    'installable': True,
+    'application': True,
+    'images': ['static/description/banner.jpg'],
+    'license': 'OPL-1',
+}

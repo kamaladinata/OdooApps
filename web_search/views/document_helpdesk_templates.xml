@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="hh_portal_layout" name="Portal Layout">
+        <t t-call="portal.frontend_layout">
+            <div class="container mt16 o_portal">
+                <div class="oe_structure">
+                    <div t-if="not no_breadcrumbs" class="row">
+                        <div class="col-sm-12">
+                            <ol class="breadcrumb o_portal_submenu">
+                                <li><a><i class="fa fa-home"/></a></li>
+                                <li t-if="page_name == 'hh' or ticket">
+                                    <a t-if="ticket" t-attf-href="/my/hh?{{ keep_query() }}">HH List</a>
+                                    <t t-else="">HH</t>
+                                </li>
+                                <li t-if="ticket">
+                                    #<span t-field="ticket.name"/>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="wrap" class='o_portal_wrap'>
+                <div class="container mb64">
+                    <t t-if="my_details">
+                        <div class="row">
+                            <div t-attf-class="col-md-9 col-lg-8">
+                                <t t-raw="0"/>
+                            </div>
+                            <div id="o_my_sidebar" class="col-md-3 col-lg-offset-1 o_my_sidebar">
+                                <div class="o_my_contact" t-if="sales_user">
+                                    <t t-call="portal.portal_contact"/>
+                                </div>
+                                <div class="o_portal_my_details">
+                                    <h3 class="page-header">Your Details <a href="/my/account" class="btn btn-default btn-xs">Change</a></h3>
+                                    <div t-field="user_id.partner_id" t-options='{"widget": "contact", "fields": ["email", "phone", "address", "name"]}'/>
+                                </div>
+                                <div class="o_my_archives" t-if="archive_groups">
+                                    <t t-call="portal.portal_archive_groups"/>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                    <t t-else="">
+                        <t t-raw="0"/>
+                    </t>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="portal_document_helpdesk" name="Document Helpdesk">
+        <t t-call="web_search.hh_portal_layout">
+            <h3>Document Helpdesk
+                <t t-call="portal.portal_searchbar"/>
+            </h3>
+            <t t-if="not tickets">
+                <p>There are currently no HH for your account.</p>
+            </t>
+            <div t-if="tickets" class="panel panel-default">
+                <div class="table-responsive"><table class="table table-hover o_portal_my_doc_table">
+                    <t t-set='user_login' t-value="request.env.user.sudo()"/>
+                    <thead>
+                        <tr class="active">
+                            <th>Document Name</th>
+                            <th>Helpdesk</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <t t-foreach="tickets" t-as="ticket">
+                        <tr>
+                            <td><a t-attf-href="/my/hh/#{ticket.id}">#<t t-esc="ticket.name"/></a></td>
+                            <td><span t-field="ticket.helpdesk_id.name"/></td>
+                            <td><span t-field="ticket.attachment"/></td>
+                        </tr>
+                    </t>
+                </table></div>
+                <div t-if="pager" class="o_portal_pager text-center">
+                    <t t-call="portal.pager"/>
+                </div>
+            </div>
+        </t>
+    </template>
+    <template id="document_followup" name="Document Issues">
+        <t t-call="web_search.hh_portal_layout">
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <h4>
+                                <t t-call='portal.record_pager'/>
+                                #<span t-field="ticket.name"/>
+                                <t t-set='user_login' t-value="request.env.user.sudo()"/>
+                            </h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    <div class="row">
+                        <strong class="col-md-2">Helpdesk</strong>
+                        <div class="col-md-4">
+                            <span t-field="ticket.helpdesk_id.name"/>
+                        </div>
+                    </div>
+                    
+                    <div class="row" style="padding-top:0px">
+                        <strong class="col-md-2">Description</strong>
+                        <div class="col-md-4">
+                            <span t-field="ticket.attachment"/>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>    
