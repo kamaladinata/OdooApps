@@ -100,7 +100,7 @@ class MyDocumentPortal(CustomerPortal):
             'title': 'Search Documents'
         })
         
-        return request.render("web_search.portal_document_helpdesk", values)
+        return request.render("web_searchbar.portal_document_helpdesk", values)
 
     @http.route([
         "/my/hh/<int:ticket_id>",
@@ -132,4 +132,4 @@ class MyDocumentPortal(CustomerPortal):
         })
 
         values.update(hh_records_pager)
-        return request.render("web_search.document_followup", values)
+        return request.render("web_searchbar.document_followup", values)

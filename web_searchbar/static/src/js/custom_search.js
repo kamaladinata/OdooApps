@@ -1,4 +1,4 @@
-odoo.define("web_search.custom_search", function (require) {
+odoo.define("web_searchbar.custom_search", function (require) {
     "use strict";
     require('web.dom_ready');
     $('input[name="search"]').devbridgeAutocomplete({

@@ -1,11 +1,11 @@
 {
-    'name': 'Website Search Autocomplete',
+    'name': 'Website Searchbar for New Table/Model',
     'category': 'Website',
-    'sequence': 10,
-    'author': 'D.Jane',
-    'summary': 'E-commerce Search Autocomplete, Matching Words, Product Image',
-    'version': '12.0.0',
-    'description': "Website Search Suggestions",
+    'sequence': 1,
+    'author': 'Kamal Aziz Adinata',
+    'summary': 'Website Searchbar for New Table/Model',
+    'version': '13.0.0',
+    'description': "Custom Web Searchbar for new model, can search content in the new models",
     'depends': ['website', 'website_helpdesk'],
     'data': [
         'views/header.xml',
@@ -17,5 +17,4 @@
     'installable': True,
     'application': True,
     'images': ['static/description/banner.jpg'],
-    'license': 'OPL-1',
 }

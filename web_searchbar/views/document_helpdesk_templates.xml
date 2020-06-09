@@ -45,7 +45,7 @@
         </t>
     </template>
     <template id="portal_document_helpdesk" name="Document Helpdesk">
-        <t t-call="web_search.hh_portal_layout">
+        <t t-call="web_searchbar.hh_portal_layout">
             <h3>    
                 <t t-call="portal.portal_searchbar"/>
             </h3>
@@ -82,7 +82,7 @@
         </t>
     </template>
     <template id="document_followup" name="Document Issues">
-        <t t-call="web_search.hh_portal_layout">
+        <t t-call="web_searchbar.hh_portal_layout">
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <div class="row">

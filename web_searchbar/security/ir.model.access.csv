@@ -1,0 +1,3 @@
+"id","name","model_id:id","group_id:id","perm_read","perm_write","perm_create","perm_unlink"
+"access_document_helpdesk_group_user","access_document_helpdesk_group_user","web_searchbar.model_document_helpdesk","base.group_user",1,1,1,1
+"access_document_helpdesk_group_portal","access_document_helpdesk_group_portal","web_searchbar.model_document_helpdesk","base.group_portal",1,0,0,0
