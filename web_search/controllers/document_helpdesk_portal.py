@@ -34,7 +34,7 @@ from odoo.tools import plaintext2html
 class MyDocumentPortal(CustomerPortal):
 
     @http.route(['/my/document', '/my/document/page/<int:page>'], type='http', auth="user", website=True)
-    def my_document_list(self, page=1, date_begin=None, date_end=None, sortby=None, search=None, search_in='content', **kw):
+    def my_document_list(self, page=1, date_begin=None, date_end=None, sortby=None, search=None, search_in='all', **kw):
         values = self._prepare_portal_layout_values()
         user = request.env.user
         
@@ -45,9 +45,9 @@ class MyDocumentPortal(CustomerPortal):
             'name': {'label': _('Subject'), 'order': 'name'},
         }
         searchbar_inputs = {
-            'content': {'input': 'content', 'label': _('Search <span class="nolabel"> (in Content)</span>')},
-            'message': {'input': 'message', 'label': _('Search in Messages')},
-            'customer': {'input': 'customer', 'label': _('Search in Customer')},
+            'name': {'input': 'name', 'label': _('Search in Name')},
+            'file': {'input': 'file', 'label': _('Search in Filename')},
+            'ticket': {'input': 'ticket', 'label': _('Search in Ticket')},
             'all': {'input': 'all', 'label': _('Search in All')},
         }
 
@@ -64,12 +64,12 @@ class MyDocumentPortal(CustomerPortal):
         # search
         if search and search_in:
             search_domain = []
-            if search_in in ('content', 'all'):
+            if search_in in ('name', 'all'):
+                search_domain = OR([search_domain, [('description', 'ilike', search)]])
+            if search_in in ('file', 'all'):
                 search_domain = OR([search_domain, [('name', 'ilike', search)]])
-            if search_in in ('customer', 'all'):
-                search_domain = OR([search_domain, [('partner_id', 'ilike', search)]])
-            if search_in in ('message', 'all'):
-                search_domain = OR([search_domain, [('message_ids.body', 'ilike', search)]])
+            # if search_in in ('message', 'all'):
+            #     search_domain = OR([search_domain, [('message_ids.body', 'ilike', search)]])
             domain += search_domain
 
         # pager
@@ -97,8 +97,9 @@ class MyDocumentPortal(CustomerPortal):
             'sortby': sortby,
             'search_in': search_in,
             'search': search,
+            'title': 'Search Documents'
         })
-        print (values, " ============ ")
+        
         return request.render("web_search.portal_document_helpdesk", values)
 
     @http.route([
