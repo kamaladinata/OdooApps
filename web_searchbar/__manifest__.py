@@ -16,5 +16,5 @@
     ],
     'installable': True,
     'application': True,
-    'images': ['static/description/banner.jpg'],
+    'images': ['static/description/banner.png'],
 }
