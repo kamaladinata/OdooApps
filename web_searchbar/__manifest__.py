@@ -7,6 +7,7 @@
     'version': '13.0.0',
     'description': "Custom Web Searchbar for new model, can search content in the new models",
     'depends': ['website', 'website_helpdesk'],
+    'images': ['static/description/banner.png'],
     'data': [
         'views/header.xml',
         'security/ir.model.access.csv',
@@ -14,7 +15,12 @@
         'views/website_document_helpdesk_view.xml',
         'views/document_helpdesk_templates.xml',
     ],
+    'active': False,
     'installable': True,
     'application': True,
-    'images': ['static/description/banner.png'],
+    'auto_install': False,
+    'price': 40.0,
+    'sequence': 1,
+    'currency': 'USD',
+    'live_test_url': 'https://www.youtube.com/watch?v=D3bc80Ualk8',
 }
